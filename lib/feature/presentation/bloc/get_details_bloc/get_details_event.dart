@@ -6,3 +6,11 @@ abstract class GetDetailsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetDetails extends GetDetailsEvent {
+  final String url;
+  const GetDetails({required this.url});
+
+  @override
+  List<Object> get props => [];
+}

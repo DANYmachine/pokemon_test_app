@@ -13,7 +13,7 @@ abstract class LocalDatasource {
 }
 
 const CACHED_POKEMONS_LIST = 'CACHED_POKEMONS_LIST';
-/*
+
 class LocalDatasourceImpl implements LocalDatasource {
   final SharedPreferences sharedPreferences;
 
@@ -53,4 +53,3 @@ class LocalDatasourceImpl implements LocalDatasource {
     return Future.value();
   }
 }
-*/

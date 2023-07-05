@@ -9,11 +9,10 @@ import '../../../core/error/failure.dart';
 class GetAllPokemons extends UseCase<List<PokemonEntity>, PagePokemonParams> {
   final PokemonRepository pokemonRepository;
 
-  GetAllPokemons({required this.pokemonRepository});
+  GetAllPokemons(this.pokemonRepository);
 
   @override
-  Future<Either<Failure, List<PokemonEntity>>> call(
-      PagePokemonParams params) async {
+  Future<Either<Failure, List<PokemonEntity>>> call(PagePokemonParams params) async {
     return await pokemonRepository.getAllPokemons(params.page);
   }
 }

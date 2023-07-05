@@ -1,15 +1,18 @@
-import 'package:pokemon_test_app/feature/data/models/details_image_model.dart';
-import 'package:pokemon_test_app/feature/data/models/type_model.dart';
 import 'package:pokemon_test_app/feature/domain/entities/details_entity.dart';
-import 'dart:convert' as convert;
 
 class DetailsModel extends DetailsEntity {
   const DetailsModel({
+    required id,
+    required name,
+    required icon,
     required image,
     required height,
     required weight,
     required types,
   }) : super(
+          id: id,
+          name: name,
+          icon: icon,
           image: image,
           height: height,
           weight: weight,
@@ -17,19 +20,25 @@ class DetailsModel extends DetailsEntity {
         );
 
   factory DetailsModel.fromJson(Map<String, dynamic> json) {
+    List<String> types = [];
+    for (var type in json['types']) {
+      types.add(type['type']['name']);
+    }
     return DetailsModel(
-      image:
-          DetailsImageModel.fromJson(json['sprites']['other']['dream_world']),
+      id: json['id'],
+      name: json['name'],
+      icon: json['sprites']['front_default'],
+      image: json['sprites']['other']['dream_world']['front_default'],
       height: json['height'],
       weight: json['weight'],
-      types: (convert.jsonDecode(json['types']) as List)
-          .map((e) => TypeModel.fromJson(e))
-          .toList(),
+      types: types,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
+      'name': name,
       'image': image,
       'height': height,
       'weight': weight,
