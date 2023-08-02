@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_test_app/feature/domain/entities/pokemon_entity.dart';
 import 'package:pokemon_test_app/feature/presentation/bloc/get_all_pokemons_bloc/get_all_pokemons_bloc.dart';
@@ -46,7 +46,10 @@ class PokemonsList extends StatelessWidget {
         }
         return Container(
           padding: const EdgeInsets.all(5),
-          child: ListView.builder(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
             controller: scrollController,
             itemBuilder: (context, index) {
               if (index < pokemons.length) {
@@ -68,7 +71,7 @@ class PokemonsList extends StatelessWidget {
   Widget _loadingIndicator() {
     return const Padding(
       padding: EdgeInsets.all(8),
-      child: Center(child: CircularProgressIndicator()),
+      child: Center(child: CupertinoActivityIndicator()),
     );
   }
 }

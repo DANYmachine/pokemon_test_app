@@ -1,9 +1,13 @@
 import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_test_app/feature/domain/entities/details_entity.dart';
 import 'package:pokemon_test_app/feature/presentation/bloc/get_details_bloc/get_details_bloc.dart';
 import 'package:pokemon_test_app/feature/presentation/widgets/pokemon_cache_image.dart';
+
+import '../widgets/details_widget.dart';
 
 class PokemonDetailsPage extends StatefulWidget {
   const PokemonDetailsPage({
@@ -58,15 +62,8 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
                   Container(
                     height: height * 0.2,
                     padding: const EdgeInsets.all(50),
-                    child: ListView.builder(
-                      itemCount: details.types.length,
-                      itemBuilder: ((context, index) {
-                        String type = details!.types[index];
-                        return Text(
-                          '${type[0].toUpperCase()}${type.substring(1).toLowerCase()}',
-                          textAlign: TextAlign.center,
-                        );
-                      }),
+                    child: PokemonDetails(
+                      details: details,
                     ),
                   )
                 ],
@@ -92,7 +89,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
   Widget _loadingIndicator() {
     return const Padding(
       padding: EdgeInsets.all(8),
-      child: Center(child: CircularProgressIndicator()),
+      child: Center(child: CupertinoActivityIndicator()),
     );
   }
 }
